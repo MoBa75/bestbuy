@@ -5,7 +5,7 @@ class Product:
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.activ = True #auf Menge achten - ab mindestens 1
+        self.active = True #auf Menge achten - ab mindestens 1
 
 
     def get_quantity(self):         #-> int
@@ -21,19 +21,22 @@ class Product:
 
 
     def is_active(self):            #-> bool
-        return self.activ
+        return self.active
 
 
     def activate(self):
-        self.activ = True
+        self.active = True
 
 
     def deactivate(self):
-        self.activ = False
+        self.active = False
 
 
-    def __str__(self):              #-> str
-        return f"{self.name} - Price: ${self.price}, Quantity: {self.quantity}"
+    def __str__(self):
+        if self.active:
+            return f"{self.name} - Price: ${self.price}, Quantity: {self.quantity}"
+        else:
+            return ""
 
 
     def buy(self, quantity):        #-> float
