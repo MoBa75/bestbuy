@@ -6,14 +6,15 @@ def make_order(store):
     order_list = []
     inventory = store.get_all_products()
     list_all_products(store)
-    print("______\nWhen you want to finish order, enter empty text.")
+    print("------\nWhen you want to finish order, enter empty text.")
     while True:
 
         while True:
             user_choice_product = input('Which product # do you want? ')
             if not user_choice_product:
                 break
-            elif user_choice_product.isnumeric() and 0 < int(user_choice_product) <= len(inventory):
+            elif (user_choice_product.isnumeric()
+                  and 0 < int(user_choice_product) <= len(inventory)):
                 user_choice_product = int(user_choice_product)
                 break
             print('ERROR: Please choose the number from listed products or leave the input blank')
@@ -66,12 +67,15 @@ def start(store):
     while True:
         print("""
    Store Menu
-   __________
+   ----------
 1. List all products in store
 2. Show total amount in store
 3. Make an order
 4. Quit
 """)
+        if store.get_total_quantity() == 0:
+            print('No more products available. Goodbye!')
+            break
         user_input = user_input_main_menu()
         if user_input == 4:
             func_dict[user_input]()
