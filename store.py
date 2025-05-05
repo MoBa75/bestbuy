@@ -23,13 +23,8 @@ class Store:
     def get_all_products(self):
        return self.products
 
-    """count = 0
-        for product in self.products:
-            count += 1
-            print(f'{count}. {product}')"""
 
-
-    def order(self, shopping_list):     #-> float
+    def order(self, shopping_list):
         price = 0.0
         for product in shopping_list:
             price += product[0].price * product[1]

@@ -2,44 +2,62 @@ from products import Product
 from store import Store
 
 
+def total_amount(store):
+    pass
+
+
+def list_all_products(store):
+    inventory = store.get_all_products()
+    for index, product in enumerate(inventory):
+        print(f'{index + 1}. {product}')
+
+
+def user_input_main_menu():
+    while True:
+        user_input = input('Please choose a number: ')
+        if user_input.isnumeric() and 0 < int(user_input) < 5:
+            return int(user_input)
+        else:
+            print('Enter a numer between 1 and 4!')
+
+
+def start(store):
+    func_dict = {
+        1: list_all_products,
+        2: total_amount,
+        3: "",
+        4: exit,
+    }
+
+    while True:
+        print("""
+1. List all products in store
+2. Show total amount in store
+3. Make an order
+4. Quit
+""")
+        user_input = user_input_main_menu()
+        if user_input == 4:
+            func_dict[user_input]()
+        func_dict[user_input](store)
+
+
 def main():
-    bose = Product("Bose QuietComfort Earbuds", price=250, quantity=500)
-    mac = Product("MacBook Air M2", price=1450, quantity=100)
-    best_buy = Store([bose, mac])
+    product_list = [Product("MacBook Air M2", price=1450, quantity=100),
+                    Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+                    Product("Google Pixel 7", price=500, quantity=250)
+                    ]
+    best_buy = Store(product_list)
 
-    pixel = Product("Google Pixel 7", price=500, quantity=250)
-    best_buy.add_product(pixel)
+    user_choice_main_menu = start(best_buy)
 
-    try:
+    """try:
         print(bose.buy(50))
         print(mac.buy(100))
     except ValueError:
-        print('Error while making order! Quantity larger than what exists')
+        print('Error while making order! Quantity larger than what exists')"""
 
-    """print(mac.is_active())
 
-    print(bose)
-    print(mac)
-
-    bose.set_quantity(1000)
-    print(bose)
-
-    print(bose.get_quantity())
-    print(best_buy.get_all_products())
-
-    best_buy = Store([bose, mac])
-    price = best_buy.order([(bose, 5), (mac, 30), (bose, 10)])
-    print(f"Order cost: {price} dollars.")"""
-
-    product_list = [Product("MacBook Air M2", price=1450, quantity=100),
-                    Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                    Product("Google Pixel 7", price=500, quantity=250),
-                    ]
-
-    best_buy = Store(product_list)
-    products = best_buy.get_all_products()
-    print(best_buy.get_total_quantity())
-    print(best_buy.order([(products[0], 1), (products[1], 2)]))
 
 if __name__ == "__main__":
     main()
