@@ -1,6 +1,17 @@
 class Product:
 
     def __init__(self, name, price, quantity):
+        if not isinstance(name, str):
+            raise TypeError(f"Expected 'name' to be str, got {type(name).__name__}!")
+        if not isinstance(price, float):
+            raise TypeError(f"Expected 'price' to be float, got {type(price).__name__}!")
+        if price <= 0:
+            raise ValueError("Price hase to be a positiv number!")
+        if not isinstance(quantity, int):
+            raise TypeError(f"Expected 'quantity' to be int, got {type(quantity).__name__}")
+        if quantity < 0:
+            raise ValueError("Quantity can not be negative!")
+
         self.name = name
         self.price = price
         self.quantity = quantity
