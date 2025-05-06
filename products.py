@@ -11,7 +11,6 @@ class Product:
             raise TypeError(f"Expected 'quantity' to be int, got {type(quantity).__name__}")
         if quantity < 0:
             raise ValueError("Quantity can not be negative!")
-
         self.name = name
         self.price = price
         self.quantity = quantity

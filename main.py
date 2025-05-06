@@ -32,7 +32,6 @@ def make_order(store):
             break
         order_list.append((inventory[user_choice_product - 1], user_choice_amount))
         print('Product added to list!')
-
     if order_list:
         print(store.order(order_list))
 
